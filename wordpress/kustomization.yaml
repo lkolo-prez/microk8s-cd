@@ -1,5 +1,6 @@
 secretGenerator:
 - name: mysql-pass
+  namespace: wptest
   literals:
   - password=Chase123$
 resources:
