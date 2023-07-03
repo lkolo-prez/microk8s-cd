@@ -1,0 +1,8 @@
+# Source: portainer/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: portainer
+  # Source: portainer/templates/serviceaccount.yaml
+
+
