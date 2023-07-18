@@ -1,0 +1,227 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dev01-magento-cron
+  namespace: dev01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev01-magento-cron
+  template:
+    metadata:
+      labels:
+        app: dev01-magento-cron
+    spec:
+      # automountServiceAccountToken: false
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: spc-dev-kv-magento-dev01
+      - name: azure
+        csi:
+          driver: file.csi.azure.com
+          readOnly: false
+          volumeAttributes:
+            secretName: azure-secret
+            shareName: azdevsaecommerc02-dev01
+            mountOptions: "dir_mode=0777,file_mode=0777,cache=strict,actimeo=30,nosharesock" # optional
+      containers:
+      - name: dev01-magento-cron
+        image: lxecommercecontainerregistry.azurecr.io/luxmed/ecommerce-cron-dev:latest
+        resources:
+          requests:
+            cpu: 400m
+            memory: 2Gi
+          limits:
+            cpu: 2000m
+            memory: 8Gi
+        env:
+        - name: ADMIN_URL
+          valueFrom:
+            secretKeyRef:
+              name: admin-url-dev01
+              key: key
+        - name: ENVIRONMENT
+          valueFrom:
+            secretKeyRef:
+              name: env-dev01
+              key: key
+        - name: FORCE_REDEPLOY
+          valueFrom:
+            secretKeyRef:
+              name: force-redeploy-dev01
+              key: key
+        - name: LUXMED_MYSQL_GLOBAL_ROOT_CA
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-mysql-global-root-ca-dev01
+              key: key
+        - name: LUXMED_APIM_IP
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-apim-ip-dev01
+              key: key
+        - name: LUXMED_APIM_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-apim-token-dev01
+              key: key
+        - name: LUXMED_APIM_URL
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-apim-url-dev01
+              key: key
+        - name: LUXMED_DEBUG
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-debug-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_HOST
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-host-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_IP
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-ip-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_PORT
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-port-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-user-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-password-dev01
+              key: key
+        - name: LUXMED_RABBITMQ_VHOST
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-rabbitmq-vhost-dev01
+              key: key
+        - name: LUXMED_ROOT_CA
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-root-ca-dev01
+              key: key
+        - name: LUXMED_SUB_CA
+          valueFrom:
+            secretKeyRef:
+              name: luxmed-sub-ca-dev01
+              key: key
+        - name: MAGENTO_ADMIN_SSL_CERT
+          valueFrom:
+            secretKeyRef:
+              name: magento-admin-ssl-cert-dev01
+              key: key
+        - name: MAGENTO_ADMIN_SSL_KEY
+          valueFrom:
+            secretKeyRef:
+              name: magento-admin-ssl-key-dev01
+              key: key
+        - name: MAGENTO_ADMIN_URL_PREFIX
+          valueFrom:
+            secretKeyRef:
+              name: magento-admin-url-prefix-dev01
+              key: key
+        - name: MAGENTO_DATABASE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-host-dev01
+              key: key
+        - name: MAGENTO_DATABASE_IP
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-ip-dev01
+              key: key
+        - name: MAGENTO_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-name-dev01
+              key: key
+        - name: MAGENTO_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-password-dev01
+              key: key
+        - name: MAGENTO_DATABASE_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-port-number-dev01
+              key: key
+        - name: MAGENTO_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: magento-database-user-dev01
+              key: key
+        - name: MAGENTO_ELASTICSEARCH_HOST
+          valueFrom:
+            secretKeyRef:
+              name: magento-elasticsearch-host-dev01
+              key: key
+        - name: MAGENTO_ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: magento-elasticsearch-password-dev01
+              key: key
+        - name: MAGENTO_ELASTICSEARCH_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: magento-elasticsearch-port-number-dev01
+              key: key
+        - name: MAGENTO_ELASTICSEARCH_USE_HTTPS
+          valueFrom:
+            secretKeyRef:
+              name: magento-elasticsearch-use-https-dev01
+              key: key
+        - name: MAGENTO_ELASTICSEARCH_USER
+          valueFrom:
+            secretKeyRef:
+              name: magento-elasticsearch-user-dev01
+              key: key
+        - name: MAGENTO_ENABLE_DATABASE_SSL
+          valueFrom:
+            secretKeyRef:
+              name: magento-enable-database-ssl-dev01
+              key: key
+        - name: MAGENTO_MODE
+          valueFrom:
+            secretKeyRef:
+              name: magento-mode-dev01
+              key: key
+        - name: PROJECT
+          valueFrom:
+            secretKeyRef:
+              name: project-dev01
+              key: key
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redis-host-dev01
+              key: key
+        - name: REDIS_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: redis-port-number-dev01
+              key: key
+        - name: SITE_URL
+          valueFrom:
+            secretKeyRef:
+              name: site-url-dev01
+              key: key
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: /mnt/secrets-store
+        - name: azure
+          mountPath: /mnt/data
