@@ -137,6 +137,13 @@ spec:
           value: "1000000"
         - name: RATE_LIMIT
           value: "0"
+      volumes:
+      - name: minecraft-data
+        hostPath:
+          path: /srv/minecraft/data
+      - name: minecraft-plugins
+        hostPath:
+          path: /srv/minecraft/plugins
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
