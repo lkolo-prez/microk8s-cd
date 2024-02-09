@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-server
+  template:
+    metadata:
+      labels:
+        app: minecraft-server
+    spec:
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-server
+        ports:
+        - containerPort: 25565
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: VERSION
+          value: "latest"
+        - name: ENABLE_RCON
+          value: "true"
+        - name: RCON_PASSWORD
+          value: "TwojeHasloRCON"
+        - name: ENABLE_AUTOPAUSE
+          value: "true"
+        - name: MAX_PLAYERS
+          value: "20"
+        - name: VIEW_DISTANCE
+          value: "10"
+        - name: MOTD
+          value: "Witaj na serwerze Minecraft!"
+        - name: SPAWN_PROTECTION
+          value: "16"
+        volumeMounts:
+        - name: minecraft-data
+          mountPath: /data
+        - name: minecraft-plugins
+          mountPath: /plugins
+      volumes:
+      - name: minecraft-data
+        hostPath:
+          path: /srv/minecraft/data
+      - name: minecraft-plugins
+        hostPath:
+          path: /srv/minecraft/plugins
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-service
+spec:
+  selector:
+    app: minecraft-server
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+  type: LoadBalancer
