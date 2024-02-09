@@ -34,7 +34,7 @@ spec:
         - name: VIEW_DISTANCE
           value: "10"
         - name: MOTD
-          value: "Witaj na serwerze Minecraft Karolo!"
+          value: "Witaj-na-serwerze-Minecraft-Karolo!"
         - name: SPAWN_PROTECTION
           value: "4"
         - name: ONLINE_MODE
