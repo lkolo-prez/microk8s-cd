@@ -23,34 +23,108 @@ spec:
           value: "TRUE"
         - name: VERSION
           value: "latest"
-  #      - name: ENABLE_RCON
-  #        value: "true"
-  #      - name: RCON_PASSWORD
-  #        value: "TwojeHasloRCON"
-  #      - name: ENABLE_AUTOPAUSE
-  #       value: "true"
-        - name: MAX_PLAYERS
-          value: "20"
-        - name: VIEW_DISTANCE
-          value: "10"
+        - name: ENABLE_RCON
+          value: "false"
+       - name: RCON_PASSWORD
+          value: "your-strong-password"  # Twoje hasło RCON
+        - name: ONLINE_MODE
+          value: "false"
+        - name: SERVER_PORT
+          value: "25565"
+        - name: RCON_PORT
+          value: "25575"
         - name: MOTD
           value: "Witaj-na-serwerze-Minecraft-Karolo!"
-        - name: SPAWN_PROTECTION
-          value: "4"
-        - name: ONLINE_MODE
-          value: "false"  # Ustawienie online-mode na true dla obsługi graczy premium
-        volumeMounts:
-        - name: minecraft-data
-          mountPath: /data
-        - name: minecraft-plugins
-          mountPath: /plugins
-      volumes:
-      - name: minecraft-data
-        hostPath:
-          path: /srv/minecraft/data
-      - name: minecraft-plugins
-        hostPath:
-          path: /srv/minecraft/plugins
+        - name: QUERY_PORT
+          value: "25565"
+        - name: VIEW_DISTANCE
+          value: "10"
+        - name: MAX_PLAYERS
+          value: "20"
+        - name: GAMEMODE
+          value: "survival"
+        - name: DIFFICULTY
+          value: "easy"
+        - name: ENABLE_COMMAND_BLOCK
+          value: "false"
+        - name: ENABLE_QUERY
+          value: "false"
+        - name: ENABLE_STATUS
+          value: "true"
+        - name: ENABLE_RCON
+          value: "false"
+        - name: BROADCAST_RCON_TO_OPS
+          value: "false"
+        - name: BROADCAST_CONSOLE_TO_OPS
+          value: "true"
+        - name: PVP
+          value: "true"
+        - name: GENERATE_STRUCTURES
+          value: "true"
+        - name: ALLOW_NETHER
+          value: "true"
+        - name: ALLOW_FLIGHT
+          value: "false"
+        - name: LOG_IPS
+          value: "true"
+        - name: SPAWN_MONSTERS
+          value: "true"
+        - name: SPAWN_ANIMALS
+          value: "true"
+        - name: SPAWN_NPCS
+          value: "true"
+        - name: MAX_WORLD_SIZE
+          value: "29999984"
+        - name: SYNC_CHUNK_WRITES
+          value: "true"
+        - name: FORCE_GAMEMODE
+          value: "false"
+        - name: HARDCORE
+          value: "false"
+        - name: WHITE_LIST
+          value: "false"
+        - name: ENFORCE_WHITELIST
+          value: "false"
+        - name: PREVENT_PROXY_CONNECTIONS
+          value: "false"
+        - name: HIDE_ONLINE_PLAYERS
+          value: "false"
+        - name: RESOURCE_PACK_PROMPT
+          value: ""
+        - name: RESOURCE_PACK_SHA1
+          value: ""
+        - name: RESOURCE_PACK
+          value: ""
+        - name: TEXT_FILTERING_CONFIG
+          value: ""
+        - name: LEVEL_NAME
+          value: "world"
+        - name: LEVEL_TYPE
+          value: "minecraft:normal"
+        - name: LEVEL_SEED
+          value: ""
+        - name: GENERATOR_SETTINGS
+          value: "{}"
+        - name: INITIAL_ENABLED_PACKS
+          value: "vanilla"
+        - name: INITIAL_DISABLED_PACKS
+          value: ""
+        - name: OP_PERMISSION_LEVEL
+          value: "3"
+        - name: FUNCTION_PERMISSION_LEVEL
+          value: "2"
+        - name: ENTITY_BROADCAST_RANGE_PERCENTAGE
+          value: "100"
+        - name: PLAYER_IDLE_TIMEOUT
+          value: "0"
+        - name: MAX_TICK_TIME
+          value: "60000"
+        - name: NETWORK_COMPRESSION_THRESHOLD
+          value: "256"
+        - name: MAX_CHAINED_NEIGHBOR_UPDATES
+          value: "1000000"
+        - name: RATE_LIMIT
+          value: "0"
 
 ---
 apiVersion: v1
