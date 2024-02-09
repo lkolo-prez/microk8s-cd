@@ -137,6 +137,15 @@ spec:
           value: "1000000"
         - name: RATE_LIMIT
           value: "0"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - dwaailuk8s03.cpls.eu
 
 ---
 apiVersion: v1
