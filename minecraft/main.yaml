@@ -18,6 +18,13 @@ spec:
         image: itzg/minecraft-server
         ports:
         - containerPort: 25565
+        resources:   # Definicja zasobów dla kontenera
+          requests:  # Minimalne wymagane zasoby
+            memory: "1Gi"  # Minimalne 1 gigabajt pamięci RAM
+            cpu: "0.5"     # Minimalne 0.5 jednostki procesora
+          limits:    # Maksymalne dostępne zasoby
+            memory: "4Gi"  # Maksymalne 2 gigabajty pamięci RAM
+            cpu: "2"       # Maksymalna jednostka procesora
         env:
         - name: EULA
           value: "TRUE"
