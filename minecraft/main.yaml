@@ -22,20 +22,22 @@ spec:
           value: "TRUE"
         - name: VERSION
           value: "latest"
-        - name: ENABLE_RCON
-          value: "true"
-        - name: RCON_PASSWORD
-          value: "TwojeHasloRCON"
-        - name: ENABLE_AUTOPAUSE
-          value: "true"
+  #      - name: ENABLE_RCON
+  #        value: "true"
+  #      - name: RCON_PASSWORD
+  #        value: "TwojeHasloRCON"
+  #      - name: ENABLE_AUTOPAUSE
+  #       value: "true"
         - name: MAX_PLAYERS
           value: "20"
         - name: VIEW_DISTANCE
           value: "10"
         - name: MOTD
-          value: "Witaj na serwerze Minecraft!"
+          value: "Witaj na serwerze Minecraft Karolo!"
         - name: SPAWN_PROTECTION
-          value: "16"
+          value: "4"
+        - name: ONLINE_MODE
+          value: "false"  # Ustawienie online-mode na true dla obsługi graczy premium
         volumeMounts:
         - name: minecraft-data
           mountPath: /data
