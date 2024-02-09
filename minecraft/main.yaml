@@ -31,6 +31,8 @@ spec:
             memory: "4Gi"  # Maksymalne 2 gigabajty pamięci RAM
             cpu: "2"       # Maksymalna jednostka procesora
         env:
+        - name: JAVA_OPTS
+          value: "-Xms1G -Xmx4G"
         - name: EULA
           value: "TRUE"
         - name: VERSION
