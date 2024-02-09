@@ -37,7 +37,7 @@ spec:
           value: "latest"
         - name: ENABLE_RCON
           value: "false"
-       - name: RCON_PASSWORD
+        - name: RCON_PASSWORD
           value: "your-strong-password"  # Twoje hasło RCON
         - name: ONLINE_MODE
           value: "false"
@@ -63,8 +63,6 @@ spec:
           value: "false"
         - name: ENABLE_STATUS
           value: "true"
-        - name: ENABLE_RCON
-          value: "false"
         - name: BROADCAST_RCON_TO_OPS
           value: "false"
         - name: BROADCAST_CONSOLE_TO_OPS
