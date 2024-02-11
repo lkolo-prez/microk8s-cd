@@ -159,10 +159,9 @@ spec:
           value: "1000000"
         - name: RATE_LIMIT
           value: "0"
-      volumeMounts:
-      - name: mc-data
-        mountPath: /minecraft/data
-
+    volumeMounts:
+    - name: mc-data
+      mountPath: /minecraft/data
 ---
 apiVersion: v1
 kind: Service
