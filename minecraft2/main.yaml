@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mc2
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+  namespace: mc2
+spec:
+  storageClassName: airlan-nfs
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +35,10 @@ spec:
     metadata:
       labels:
         app: minecraft-server
+  volumes:
+  - name: mc-data
+    persistentVolumeClaim:
+      claimName: my-pvc
     spec:
       containers:
       - name: minecraft
@@ -48,7 +70,7 @@ spec:
         - name: RCON_PORT
           value: "25575"
         - name: MOTD
-          value: "Witaj-na-serwerze-Minecraft-Karolo!"
+          value: "Witaj-na-serwerze-Minecraft"
         - name: QUERY_PORT
           value: "25565"
         - name: VIEW_DISTANCE
@@ -86,7 +108,7 @@ spec:
         - name: SPAWN_NPCS
           value: "true"
         - name: MAX_WORLD_SIZE
-          value: "29999984"
+          value: "1000"
         - name: SYNC_CHUNK_WRITES
           value: "true"
         - name: FORCE_GAMEMODE
@@ -100,7 +122,7 @@ spec:
         - name: PREVENT_PROXY_CONNECTIONS
           value: "false"
         - name: HIDE_ONLINE_PLAYERS
-          value: "false"
+          value: "true"
         - name: RESOURCE_PACK_PROMPT
           value: ""
         - name: RESOURCE_PACK_SHA1
@@ -137,21 +159,9 @@ spec:
           value: "1000000"
         - name: RATE_LIMIT
           value: "0"
-      volumes:
-      - name: mc2
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: my-pvc
-  namespace: mc2
-spec:
-  storageClassName: airlan-nfs
-  accessModes: [ReadWriteOnce]
-  resources:
-    requests:
-      storage: 2Gi
+      volumeMounts:
+      - name: mc-data
+        mountPath: /minecraft/data
 
 ---
 apiVersion: v1
